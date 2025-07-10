@@ -3,5 +3,10 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>Olá, {{ nome }}</h1> <!-- HOME PROVISÓRIA -->
+    <!-- HOME PROVISÓRIA -->
+    {% if current_user.is_authenticated %}
+        <h1>Olá!, {{ current_user.nome }}</h1>
+    {% else %}
+        <h1>Olá!</h1>
+    {% endif %}
 {% endblock %}
