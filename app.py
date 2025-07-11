@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from database import init_database
 from utils import script_sql
 from modelo import User
 
@@ -10,6 +11,8 @@ app = Flask(__name__)
 app.secret_key = 'SENHASUPERHIMPERMEGABLASTERSECRETA'
 
 login_manager = LoginManager(app)
+
+init_database()
 
 
 @login_manager.user_loader
