@@ -51,10 +51,10 @@ def login():
         senha = request.form.get('senha')
 
         user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_email = ?', (email,))
-        if not user or not check_password_hash(user[-1], senha):
+        if not user or not check_password_hash(user['usu_senha'], senha):
             return redirect(url_for('register'))
 
-        login_user(User(id=user[0], nome=user[1], email=user[2]))
+        login_user(User(id=user['usu_id'], nome=user['usu_nome'], email=user['usu_email']))
         return redirect(url_for('index'))
     return render_template('login.html')
 
