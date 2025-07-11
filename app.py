@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 from utils import script_sql
 from modelo import User
 
@@ -28,12 +29,12 @@ def register():
         email = request.form.get('email')
         senha = request.form.get('senha')
 
-        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_nome = \'{nome}\' AND usu_email = \'{email}\' AND usu_senha = \'{senha}\'')
-        if user:
+        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_nome = {nome!r} AND usu_email = {email!r}')
+        if user and check_password_hash(user[-1], senha):
             return redirect(url_for('login'))
 
-        new_id = script_sql('SELECT max(usu_id) FROM tb_usuario')[0] + 1 # Criando o próximo ID
-        script_sql(f'INSERT INTO tb_usuario VALUES ({new_id!r}, {nome!r}, {email!r}, {senha!r})')
+        new_id = (script_sql('SELECT max(usu_id) FROM tb_usuario')[0] or 0) + 1 # Criando o próximo ID
+        script_sql(f'INSERT INTO tb_usuario VALUES ({new_id!r}, {nome!r}, {email!r}, {generate_password_hash(senha)!r})')
         login_user(User(new_id, nome, email, senha))
         return redirect(url_for('index'))
     return render_template('register.html')
@@ -45,8 +46,8 @@ def login():
         email = request.form.get('email')
         senha = request.form.get('senha')
 
-        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_email = \'{email}\' AND usu_senha = \'{senha}\'') # Adicionar verificação com werkzeug
-        if not user:
+        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_email = {email!r}')
+        if not user or not check_password_hash(user[-1], senha):
             return redirect(url_for('register'))
 
         login_user(User(*user))
