@@ -3,14 +3,13 @@ from utils import script_sql
 
 
 class User(UserMixin):
-    def __init__(self, id: str, nome: str, email: str, senha: str):
+    def __init__(self, id: str, nome: str, email: str):
         self.id = id
         self.nome = nome
         self.email = email
-        self.senha = senha
     
     @classmethod
     def get(cls, user_id: str) -> 'User':
-        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = {int(user_id)}')
+        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (user_id,))
         if user:
-            return cls(id=user[0], nome=user[1], email=user[2], senha=user[3])
+            return cls(id=user[0], nome=user[1], email=user[2])

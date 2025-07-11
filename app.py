@@ -11,6 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'SENHASUPERHIMPERMEGABLASTERSECRETA'
 
 login_manager = LoginManager(app)
+login_manager.login_view = 'login'
 
 init_database()
 
@@ -32,13 +33,13 @@ def register():
         email = request.form.get('email')
         senha = request.form.get('senha')
 
-        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_nome = {nome!r} AND usu_email = {email!r}')
-        if user and check_password_hash(user[-1], senha):
+        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_email = ?', (email,))
+        if user:
             return redirect(url_for('login'))
 
         new_id = (script_sql('SELECT max(usu_id) FROM tb_usuario')[0] or 0) + 1 # Criando o próximo ID
-        script_sql(f'INSERT INTO tb_usuario VALUES ({new_id!r}, {nome!r}, {email!r}, {generate_password_hash(senha)!r})')
-        login_user(User(new_id, nome, email, senha))
+        script_sql(f'INSERT INTO tb_usuario VALUES (?, ?, ?, ?)', (new_id, nome, email, generate_password_hash(senha)))
+        login_user(User(new_id, nome, email))
         return redirect(url_for('index'))
     return render_template('register.html')
 
@@ -49,11 +50,11 @@ def login():
         email = request.form.get('email')
         senha = request.form.get('senha')
 
-        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_email = {email!r}')
+        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_email = ?', (email,))
         if not user or not check_password_hash(user[-1], senha):
             return redirect(url_for('register'))
 
-        login_user(User(*user))
+        login_user(User(id=user[0], nome=user[1], email=user[2]))
         return redirect(url_for('index'))
     return render_template('login.html')
 

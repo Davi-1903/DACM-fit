@@ -1,6 +1,7 @@
-from utils import script_sql
+import sqlite3
 
 
 def init_database():
-    with open('database/schema.sql') as f:
-        script_sql(f.read())
+    with sqlite3.connect('database/banco.db') as conn:
+        with open('database/schema.sql') as f:
+            conn.execute(f.read())
