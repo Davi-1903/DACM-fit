@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Dados pessoas{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('cadastro_pessoal' ) }}" method="POST">
+        <h2>Dados pessoas</h2>
+        <label for="endereco">Endereço </label>
+        <input type="text" id="endereco" name="endereco" required>
+        <label for="telefone">Telefone </label>
+        <input type="tel" id="telefone" name="telefone" required>
+        <label for="sexo">Sexo </label>
+        <select name="sexo" id="sexo">
+            <option value="masc">Marculino</option>
+            <option value="fem">Feminino</option>
+            <option value="não responder">Não responder</option>
+        </select>
+        <button type="submit">Avançar</button>
+    </form>
+{% endblock %}

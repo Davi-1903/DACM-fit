@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Avaliação Física{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('avaliacao' ) }}" method="POST">
+        <h2>Dados pessoas</h2>
+        <label for="peso">Peso</label>
+        <input type="number" id="peso" name="peso" step="0.01" min="0" required>
+        <label for="altura">Altura </label>
+        <input type="number" id="altura" name="altura" step="0.01" min="0" required>
+        <label for="data_nascimento">Data de nascimento </label>
+        <input type="date" name="data_nascimento" id="data_nascimento" required>
+        <label for="sexo">Tipo de treinho </label>
+        <select name="tipo_treino" id="tipo_treino" required>
+            <option value="hipertofria">Hipertofria</option>
+            <option value="força">Força</option>
+            <option value="emagrecimento">Emagrecimento</option>
+            <option value="funcional">Funcional</option>
+        </select>
+        <button type="submit">Concluir</button>
+    </form>
+{% endblock %}
