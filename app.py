@@ -68,7 +68,8 @@ def dados_pessoal():
         telefone = request.form.get('telefone')
         script_sql(f'UPDATE tb_usuario SET usu_endereco = ?, usu_sexo = ?, usu_telefone = ? WHERE usu_id = ?', (endereco, sexo, telefone, current_user.id))
         return render_template('avaliacao_fisica.html')
-    return render_template('cadastro_pessoal.html')
+    return render_template('dados_pessoais.html')
+
 
 @app.route('/avaliacao_fisica', methods=['GET', 'POST'])
 def avaliacao():
@@ -87,6 +88,14 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@login_required
+@app.route('/deletar_conta', methods=['GET', 'POST'])
+def deletar_conta():
+    if request.method == 'POST':
+        script_sql('delete from tb_usuario where usu_id = ?;', (current_user.id,))
+        logout_user()
+        return redirect(url_for('index'))
+    return render_template('deletar_conta.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
