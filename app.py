@@ -42,7 +42,7 @@ def register():
         script_sql(f'INSERT INTO tb_usuario (usu_id, usu_nome, usu_email, usu_senha) VALUES(?, ?, ?, ?)', (new_id, nome, email, generate_password_hash(senha)))
         usuario = User(new_id, nome, email)
         login_user(usuario)
-        return redirect(url_for('cadastro_pessoal'))
+        return redirect(url_for('dados_pessoal'))
     return render_template('register.html')
 
 
@@ -60,6 +60,26 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html')
 
+@app.route('/dados_pessoal', methods=['GET', 'POST'])
+def dados_pessoal():
+    if request.method == 'POST':
+        sexo = request.form.get('sexo')
+        endereco = request.form.get('endereco')
+        telefone = request.form.get('telefone')
+        script_sql(f'UPDATE tb_usuario SET usu_endereco = ?, usu_sexo = ?, usu_telefone = ? WHERE usu_id = ?', (endereco, sexo, telefone, current_user.id))
+        return render_template('avaliacao_fisica.html')
+    return render_template('cadastro_pessoal.html')
+
+@app.route('/avaliacao_fisica', methods=['GET', 'POST'])
+def avaliacao():
+    if request.method == 'POST':
+        peso = request.form.get('peso')
+        altura = request.form.get('altura')
+        data_nascimento = request.form.get('data_nascimento')
+        tipo_treino = request.form.get('tipo_treino')
+        script_sql(f'UPDATE tb_usuario SET usu_peso = ?, usu_altura = ?, usu_data_nascimento = ?, usu_tipo_treino = ? WHERE usu_id = ?', (peso, altura, data_nascimento, tipo_treino, current_user.id))
+        return redirect(url_for('index'))
+    return render_template('avaliacao_fisica.html')
 
 @app.route('/logout')
 @login_required
