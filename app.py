@@ -26,6 +26,7 @@ def index():
     return render_template('index.html')
 
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -38,9 +39,10 @@ def register():
             return redirect(url_for('login'))
 
         new_id = (script_sql('SELECT max(usu_id) FROM tb_usuario')[0] or 0) + 1 # Criando o próximo ID
-        script_sql(f'INSERT INTO tb_usuario VALUES (?, ?, ?, ?)', (new_id, nome, email, generate_password_hash(senha)))
-        login_user(User(new_id, nome, email))
-        return redirect(url_for('index'))
+        script_sql(f'INSERT INTO tb_usuario (usu_id, usu_nome, usu_email, usu_senha) VALUES(?, ?, ?, ?)', (new_id, nome, email, generate_password_hash(senha)))
+        usuario = User(new_id, nome, email)
+        login_user(usuario)
+        return redirect(url_for('cadastro_pessoal'))
     return render_template('register.html')
 
 
