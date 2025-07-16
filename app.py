@@ -97,5 +97,22 @@ def deletar_conta():
         return redirect(url_for('index'))
     return render_template('deletar_conta.html')
 
+@login_required
+@app.route('/editar', methods=['GET', 'POST'])
+def editar():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        peso = request.form['peso']
+        altura = request.form['altura']
+        telefone = request.form['telefone']
+        data = request.form['data']
+        sexo = request.form['sexo']
+        endereco = request.form['endereco']
+        tipo_treino = request.form['tipo_treino']
+        id_user = current_user.id
+        script_sql(f'UPDATE tb_usuario SET usu_nome = ?, usu_peso = ?, usu_altura = ?, usu_telefone = ?, usu_data_nascimento = ?, usu_sexo = ?, usu_endereco = ?, usu_tipo_treino = ? WHERE usu_id = ?;', (nome, peso, altura, telefone, data, sexo, endereco, tipo_treino, id_user))
+        return redirect(url_for('index'))
+    return render_template('formulario_edicao.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
