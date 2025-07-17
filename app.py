@@ -100,6 +100,7 @@ def deletar_conta():
 @login_required
 @app.route('/editar', methods=['GET', 'POST'])
 def editar():
+    id_user = current_user.id
     if request.method == 'POST':
         nome = request.form['nome']
         peso = request.form['peso']
@@ -109,10 +110,21 @@ def editar():
         sexo = request.form['sexo']
         endereco = request.form['endereco']
         tipo_treino = request.form['tipo_treino']
-        id_user = current_user.id
         script_sql(f'UPDATE tb_usuario SET usu_nome = ?, usu_peso = ?, usu_altura = ?, usu_telefone = ?, usu_data_nascimento = ?, usu_sexo = ?, usu_endereco = ?, usu_tipo_treino = ? WHERE usu_id = ?;', (nome, peso, altura, telefone, data, sexo, endereco, tipo_treino, id_user))
         return redirect(url_for('index'))
-    return render_template('formulario_edicao.html')
+    user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (id_user,))
+    return render_template('formulario_edicao.html', user=user)
+
+@login_required
+@app.route('/alterar_senha', methods=['GET', 'POST'])
+def alterar_senha():
+    id_user = current_user.id
+    user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (id_user,))
+    if request.method == 'POST':
+        senha = request.form['senha']
+        if check_password_hash(user['usu_senha'], senha):
+            return 'Sua senha não pode ser igual'
+    return render_template('alterar_senha.html', user=user)
 
 if __name__ == '__main__':
     app.run(debug=True)

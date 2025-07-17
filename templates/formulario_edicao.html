@@ -6,31 +6,63 @@
 
 {% block content %}
     <form action="{{ url_for('editar') }}" method="post">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="{{user['usu_email']}}">
         <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome">
+        <input type="text" name="nome" id="nome" value="{{user['usu_nome']}}">
         <label for="endereco">Endereço</label>
-        <input type="text" name="endereco" id="endereco">
+        <input type="text" name="endereco" id="endereco" value="{{user['usu_endereco']}}">
         <label for="telefone">Telefone</label>
-        <input type="number" name="telefone" id="telefone">
+        <input type="tel" name="telefone" id="telefone" value="{{user['usu_telefone']}}">
         <label for="peso">Peso</label>
-        <input type="number" name="peso" id="peso">
+        <input type="number" name="peso" id="peso" value="{{user['usu_peso']}}" step="0.01" min="0">
         <label for="altura">Altura</label>
-        <input type="number" name="altura" id="altura">
+        <input type="number" name="altura" id="altura" value="{{user['usu_altura']}}" step="0.01" min="0">
         <label for="data">Data de Nascimento</label>
-        <input type="date" name="data" id="data">
+        <input type="date" name="data" id="data" value="{{user['usu_data_nascimento']}}">
         <label for="sexo">Sexo</label>
         <select name="sexo" id="sexo">
-            <option value="F">Feminino</option>
-            <option value="M">Masculino</option>
-            <option value="N">Prefiro não informar</option>
+            {% if user['usu_sexo'] == 'fem' %}
+                <option value="fem" selected>Feminino</option>
+            {% else %}
+                <option value="fem" >Feminino</option>
+            {% endif %}
+            {% if user['usu_sexo'] == 'masc' %}
+                <option value="masc" selected>Masculino</option>
+            {% else %}
+                <option value="masc">Masculino</option>
+            {% endif %}
+            {% if user['usu_sexo'] == 'não responder' %}
+                <option value="não responder" selected>Prefiro não informar</option>
+            {% else %}
+                <option value="não responder">Prefiro não informar</option>
+            {% endif %}
+            
         </select>
         <label for="tipo_treino">Tipo de treino</label>
-        <select name="tipo_treino" id="tipo_treino" required>
-            <option value="hipertofria">Hipertofria</option>
-            <option value="força">Força</option>
-            <option value="emagrecimento">Emagrecimento</option>
-            <option value="funcional">Funcional</option>
+        <select name="tipo_treino" id="tipo_treino">
+            {% if user['usu_tipo_treino'] == 'hipertrofia' %}
+                <option value="hipertrofia" selected>Hipertrofia</option>
+            {% else %}
+                <option value="hipertrofia" >Hipertrofia</option>
+            {% endif %}
+            {% if user['usu_tipo_treino'] == 'força' %}
+                <option value="força" selected>Força</option>
+            {% else %}
+                <option value="força">Força</option>
+            {% endif %}
+            {% if user['usu_tipo_treino'] == 'emagrecimento' %}
+                <option value="emagrecimento" selected>Emagrecimento</option>
+            {% else %}
+                <option value="emagrecimento">Emagrecimento</option>
+            {% endif %}
+            {% if user['usu_tipo_treino'] == 'funcional' %}
+                <option value="funcional" selected>Funcional</option>
+            {% else %}
+                <option value="funcional">Funcional</option>
+            {% endif %}
         </select>
         <button type="submit">Editar</button>
     </form>
+    <a href="{{url_for('alterar_senha')}}">Alterar senha?</a>
 {% endblock %}

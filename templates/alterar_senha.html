@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Alterar senha
+{% endblock %}
+
+{% block content %}
+    <form action="{{url_for('alterar_senha')}}" method="post">
+        <label for="senha">Nova Senha:</label>
+        <input type="password" name="senha" id="senha" required>
+        <button type="submit">Enviar</button>
+    </form>
+{% endblock %}
