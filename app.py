@@ -42,7 +42,7 @@ def register():
         script_sql(f'INSERT INTO tb_usuario (usu_id, usu_nome, usu_email, usu_senha) VALUES(?, ?, ?, ?)', (new_id, nome, email, generate_password_hash(senha)))
         usuario = User(new_id, nome, email)
         login_user(usuario)
-        return redirect(url_for('dados_pessoal'))
+        return redirect(url_for('dados_pessoais'))
     return render_template('register.html')
 
 
@@ -60,8 +60,8 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html')
 
-@app.route('/dados_pessoal', methods=['GET', 'POST'])
-def dados_pessoal():
+@app.route('/dados_pessoais', methods=['GET', 'POST'])
+def dados_pessoais():
     if request.method == 'POST':
         sexo = request.form.get('sexo')
         endereco = request.form.get('endereco')
