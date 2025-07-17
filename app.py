@@ -42,7 +42,7 @@ def register():
         script_sql(f'INSERT INTO tb_usuario (usu_id, usu_nome, usu_email, usu_senha) VALUES(?, ?, ?, ?)', (new_id, nome, email, generate_password_hash(senha)))
         usuario = User(new_id, nome, email)
         login_user(usuario)
-        return redirect(url_for('dados_pessoal'))
+        return redirect(url_for('dados_pessoais'))
     return render_template('register.html')
 
 
@@ -60,8 +60,8 @@ def login():
         return redirect(url_for('index'))
     return render_template('login.html')
 
-@app.route('/dados_pessoal', methods=['GET', 'POST'])
-def dados_pessoal():
+@app.route('/dados_pessoais', methods=['GET', 'POST'])
+def dados_pessoais():
     if request.method == 'POST':
         sexo = request.form.get('sexo')
         endereco = request.form.get('endereco')
@@ -102,6 +102,7 @@ def deletar_conta():
 def editar():
     id_user = current_user.id
     if request.method == 'POST':
+        email = request.form['email']
         nome = request.form['nome']
         peso = request.form['peso']
         altura = request.form['altura']
@@ -110,7 +111,7 @@ def editar():
         sexo = request.form['sexo']
         endereco = request.form['endereco']
         tipo_treino = request.form['tipo_treino']
-        script_sql(f'UPDATE tb_usuario SET usu_nome = ?, usu_peso = ?, usu_altura = ?, usu_telefone = ?, usu_data_nascimento = ?, usu_sexo = ?, usu_endereco = ?, usu_tipo_treino = ? WHERE usu_id = ?;', (nome, peso, altura, telefone, data, sexo, endereco, tipo_treino, id_user))
+        script_sql(f'UPDATE tb_usuario SET usu_nome = ?, usu_peso = ?, usu_altura = ?, usu_telefone = ?, usu_data_nascimento = ?, usu_sexo = ?, usu_endereco = ?, usu_tipo_treino = ?, usu_email = ? WHERE usu_id = ?;', (nome, peso, altura, telefone, data, sexo, endereco, tipo_treino, email, id_user))
         return redirect(url_for('index'))
     user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (id_user,))
     return render_template('formulario_edicao.html', user=user)
