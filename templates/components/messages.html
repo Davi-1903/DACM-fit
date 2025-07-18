@@ -1,0 +1,19 @@
+{% with errors = get_flashed_messages(category_filter=["error"]) %}
+
+{% if errors %}
+ {% for msg in errors %}
+ <span class="error">{{ msg }}</span>
+ {% endfor %}
+{% endif %}
+
+{% endwith %}
+
+{% with sucess = get_flashed_messages(category_filter=["sucess"]) %}
+
+{% if sucess %}
+ {% for msg in sucess %}
+ <span class="sucess">{{ msg }}</span>
+ {% endfor %}
+{% endif %}
+
+{% endwith %}
