@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+    {% include 'components/messages.html' %}
     <form action="{{url_for('alterar_senha')}}" method="post">
         <label for="senha">Nova Senha:</label>
         <input type="password" name="senha" id="senha" required>
