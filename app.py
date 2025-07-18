@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import init_database
@@ -36,6 +36,7 @@ def register():
 
         user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_email = ?', (email,))
         if user:
+            flash('Você já esta logado', category='error')
             return redirect(url_for('login'))
 
         new_id = (script_sql('SELECT max(usu_id) FROM tb_usuario')[0] or 0) + 1 # Criando o próximo ID
@@ -54,7 +55,8 @@ def login():
 
         user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_email = ?', (email,))
         if not user or not check_password_hash(user['usu_senha'], senha):
-            return redirect(url_for('register'))
+            flash('Dados incorretos', category='error')
+            return redirect(url_for('login'))
 
         login_user(User(id=user['usu_id'], nome=user['usu_nome'], email=user['usu_email']))
         return redirect(url_for('index'))
@@ -79,6 +81,7 @@ def avaliacao():
         data_nascimento = request.form.get('data_nascimento')
         tipo_treino = request.form.get('tipo_treino')
         script_sql(f'UPDATE tb_usuario SET usu_peso = ?, usu_altura = ?, usu_data_nascimento = ?, usu_tipo_treino = ? WHERE usu_id = ?', (peso, altura, data_nascimento, tipo_treino, current_user.id))
+        flash('Cadastro realizado com sucesso', category='sucess')
         return redirect(url_for('index'))
     return render_template('avaliacao_fisica.html')
 
@@ -124,7 +127,8 @@ def alterar_senha():
     if request.method == 'POST':
         senha = request.form['senha']
         if check_password_hash(user['usu_senha'], senha):
-            return 'Sua senha não pode ser igual'
+            flash('Sua senha precisa ser diferente', category='error')
+            return redirect(url_for('alterar_senha'))
     return render_template('alterar_senha.html', user=user)
 
 if __name__ == '__main__':
