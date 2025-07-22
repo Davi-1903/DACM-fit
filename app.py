@@ -104,6 +104,7 @@ def deletar_conta():
 @app.route('/editar', methods=['GET', 'POST'])
 def editar():
     id_user = current_user.id
+    user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (id_user,))
     if request.method == 'POST':
         email = request.form['email']
         nome = request.form['nome']
@@ -114,9 +115,11 @@ def editar():
         sexo = request.form['sexo']
         endereco = request.form['endereco']
         tipo_treino = request.form['tipo_treino']
-        script_sql(f'UPDATE tb_usuario SET usu_nome = ?, usu_peso = ?, usu_altura = ?, usu_telefone = ?, usu_data_nascimento = ?, usu_sexo = ?, usu_endereco = ?, usu_tipo_treino = ?, usu_email = ? WHERE usu_id = ?;', (nome, peso, altura, telefone, data, sexo, endereco, tipo_treino, email, id_user))
-        return redirect(url_for('index'))
-    user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (id_user,))
+        senha = request.form['senha']
+        if check_password_hash(user['usu_senha'], senha):
+            script_sql(f'UPDATE tb_usuario SET usu_nome = ?, usu_peso = ?, usu_altura = ?, usu_telefone = ?, usu_data_nascimento = ?, usu_sexo = ?, usu_endereco = ?, usu_tipo_treino = ?, usu_email = ? WHERE usu_id = ?;', (nome, peso, altura, telefone, data, sexo, endereco, tipo_treino, email, id_user))
+            return redirect(url_for('index'))
+        return redirect(url_for('editar'))
     return render_template('formulario_edicao.html', user=user)
 
 @login_required
@@ -126,9 +129,16 @@ def alterar_senha():
     user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (id_user,))
     if request.method == 'POST':
         senha = request.form['senha']
+        senha_ant = request.form['senha_ant']
         if check_password_hash(user['usu_senha'], senha):
             flash('Sua senha precisa ser diferente', category='error')
             return redirect(url_for('alterar_senha'))
+        if not check_password_hash(user['usu_senha'], senha_ant):
+            flash('Insira a senha correta.', category='error')
+            return redirect(url_for('alterar_senha'))
+        script_sql(f'UPDATE tb_usuario SET usu_senha = ? WHERE usu_id = ?', (generate_password_hash(senha), id_user))
+        return redirect(url_for('index'))
+    
     return render_template('alterar_senha.html', user=user)
 
 if __name__ == '__main__':
