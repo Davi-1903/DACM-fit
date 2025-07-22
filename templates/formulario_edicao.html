@@ -62,6 +62,8 @@
                 <option value="funcional">Funcional</option>
             {% endif %}
         </select>
+        <p>Insira a senha para finalizar:</p>
+        <input type="password" name="senha" id="senha">
         <button type="submit">Editar</button>
     </form>
     <a href="{{url_for('alterar_senha')}}">Alterar senha?</a>
