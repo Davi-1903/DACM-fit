@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from database import init_database
 from utils import script_sql
 from modelo import User
+import json
 
 
 app = Flask(__name__)
@@ -140,6 +141,14 @@ def alterar_senha():
         return redirect(url_for('index'))
     
     return render_template('alterar_senha.html', user=user)
+
+@login_required
+@app.route('/treino')
+def tabela_treino():
+    tipo_treino = script_sql(f'SELECT usu_tipo_treino FROM tb_usuario WHERE usu_id = ?', (current_user.id,))
+    with open('database/treino.json', encoding='utf-8') as f:
+        treinos = json.load(f)
+    return render_template('tabela_treino.html', treino = treinos[tipo_treino['usu_tipo_treino']])
 
 if __name__ == '__main__':
     app.run(debug=True)
