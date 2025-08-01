@@ -1,0 +1,42 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    height: 100vh;
+}
+main {
+    /* acho que é uma cambiarra */
+    margin-top: 8%;  
+}
+
+.tabela h1 {
+      text-align: center;
+      color: #2c3050;
+      margin-bottom: 30px;
+}
+
+.tabela thead {
+    padding: 14px 18px;
+    background-color: #0A0A40;
+    color: white;
+    border-radius: 8px;
+}
+.tabela table, td, th{
+    border-collapse: collapse;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    padding: 14px 18px;
+    text-align: center;
+}
+.tabela table {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.tabela tbody tr:nth-child(odd) {
+    background-color: #f7fbff;
+}
+/* tbody tr:hover {
+    background-color: #ccc5ee;
+} */

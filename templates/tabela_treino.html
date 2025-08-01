@@ -3,33 +3,35 @@
 {% block title %}Tabela de treino{% endblock %}
 
 {% block content %}
-    <table style="border: 1px solid;">
-        <thead> 
-            <tr> 
-                <th style="border: 1px solid;">Dia</th>
-                <th style="border: 1px solid;">Exercício  </th>
-                <th style="border: 1px solid;">Séries</th>
-                <th style="border: 1px solid;">Repetições</th>
-                <th style="border: 1px solid;">Descanso</th>
-            </tr>
-        {% for dia, exercicios in treino.items() %}
-            <tr>
-                <th  style="border: 1px solid;">{{dia}}</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for dados in exercicios %}
+    <div class="tabela">
+        <h1>Minha Tabela de Treinos</h1>
+        <table>
+            <thead>
                 <tr>
-                {% for k in dados %}
-                    <td  style="border: 1px solid;"></td>
-                    <td  style="border: 1px solid;">{{k}}</td>
-                    {% for i in dados[k].values() %}
-                        <td  style="border: 1px solid;">{{i}}</td>
-                    {% endfor %}
-                {% endfor %}
+                    <th>Dia</th>
+                    <th>Exercício  </th>
+                    <th>Séries</th>
+                    <th>Repetições</th>
+                    <th>Descanso (min)</th>
                 </tr>
+            </thead>
+            <tbody>
+                {% for dia, exercicios in treino.items() %}
+                <tr style="border: 2px solid rgb(221, 221, 221);">
+                    <td rowspan="5" style="font-weight: bold;">{{dia}}</td>
+                </tr>
+                {% for dados in exercicios %}
+                    <tr>
+                    {% for k in dados %}
+                        <td>{{k}}</td>
+                        {% for i in dados[k].values() %}
+                            <td>{{i}}</td>
+                        {% endfor %}
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
