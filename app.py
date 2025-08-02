@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import init_database
-from utils import script_sql
+from utils import script_sql, script_sql_all
 from modelo import User
 import json
 
@@ -92,17 +92,18 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@login_required
 @app.route('/deletar_conta', methods=['GET', 'POST'])
+@login_required
 def deletar_conta():
     if request.method == 'POST':
+        script_sql('delete from tb_registro_treino where reg_usu_id = ?;', (current_user.id,))
         script_sql('delete from tb_usuario where usu_id = ?;', (current_user.id,))
         logout_user()
         return redirect(url_for('index'))
     return render_template('deletar_conta.html')
 
-@login_required
 @app.route('/editar', methods=['GET', 'POST'])
+@login_required
 def editar():
     id_user = current_user.id
     user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (id_user,))
@@ -120,11 +121,12 @@ def editar():
         if check_password_hash(user['usu_senha'], senha):
             script_sql(f'UPDATE tb_usuario SET usu_nome = ?, usu_peso = ?, usu_altura = ?, usu_telefone = ?, usu_data_nascimento = ?, usu_sexo = ?, usu_endereco = ?, usu_tipo_treino = ?, usu_email = ? WHERE usu_id = ?;', (nome, peso, altura, telefone, data, sexo, endereco, tipo_treino, email, id_user))
             return redirect(url_for('index'))
+        flash('Senha incorreta. Faça o passo novamente.', category='error')
         return redirect(url_for('editar'))
     return render_template('formulario_edicao.html', user=user)
 
-@login_required
 @app.route('/alterar_senha', methods=['GET', 'POST'])
+@login_required
 def alterar_senha():
     id_user = current_user.id
     user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (id_user,))
@@ -142,13 +144,48 @@ def alterar_senha():
     
     return render_template('alterar_senha.html', user=user)
 
-@login_required
 @app.route('/treino')
+@login_required
 def tabela_treino():
     tipo_treino = script_sql(f'SELECT usu_tipo_treino FROM tb_usuario WHERE usu_id = ?', (current_user.id,))
     with open('database/treino.json', encoding='utf-8') as f:
         treinos = json.load(f)
     return render_template('tabela_treino.html', treino = treinos[tipo_treino['usu_tipo_treino']])
+
+@app.route('/avisos')
+@login_required
+def avisos():
+    return render_template('avisos.html')
+
+@app.route('/registrar_treino', methods=['GET', 'POST'])
+@login_required
+def registrar_treino():
+    if request.method == 'POST':
+        data = request.form['data']
+        if 'treinou' in request.form:
+            treinou = 'Sim'
+        else:
+            treinou = 'Não'
+        tempo = request.form['tempo']
+        obs = request.form['observacoes']
+        
+        verificar = script_sql(f'SELECT * FROM tb_registro_treino WHERE reg_data = ?', (data, ))
+        if not verificar:
+            script_sql(f'INSERT INTO tb_registro_treino (reg_treinou, reg_data, reg_observacao, reg_tempo, reg_usu_id) VALUES (?, ?, ?, ?, ?)', (treinou, data, obs, tempo, current_user.id))
+            flash('Registro realizado com sucesso', category='success')
+            return redirect(url_for('exibir_registro_treino'))
+        flash('Já houve registros nessa data.', category='error')
+        return redirect(url_for('registrar_treino'))
+    return render_template('registrar_treino.html')
+
+@app.route('/exibir_registro_treino')
+@login_required
+def exibir_registro_treino():
+    registros = script_sql_all(f'SELECT * FROM tb_registro_treino WHERE reg_usu_id = ?', (current_user.id, ))
+    if registros:
+        return render_template('exibir_registro_treino.html', lista=registros)
+    return render_template('exibir_registro_treino.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
