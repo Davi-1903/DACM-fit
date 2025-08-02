@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registrar Treino
+{% endblock %}
+
+{% block content %}
+    <form action="{{url_for('registrar_treino')}}" method="post">
+        <h2>Registrar Treino</h2>
+        {% include 'components/messages.html'   %}
+
+        <label for="data">Data:</label>
+        <input type="date" name="data" id="data" required>
+
+        <label for="treinou">Treinou hoje?</label>
+        <input type="checkbox" id="treinou" name="treinou">
+
+        <label for="tempo">Tempo:</label>
+        <input type="number" name="tempo" id="tempo" placeholder="60 (min)">
+
+
+        <label for="observacoes">Observações:</label>
+        <textarea id="observacoes" name="observacoes" rows="3" placeholder="Como foi o treino, dores, humor etc. (opcional)"></textarea>
+        
+        <button type="submit">Salvar registro</button>
+    </form>
+{% endblock %}

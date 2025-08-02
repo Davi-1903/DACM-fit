@@ -6,6 +6,7 @@
 
 {% block content %}
     <form action="{{ url_for('editar') }}" method="post">
+        <h2>Editar dados</h2>
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="{{user['usu_email']}}">
         <label for="nome">Nome</label>

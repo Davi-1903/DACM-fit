@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Registro treino
+{% endblock %}
+
+{% block content %}
+    <h2>Registros</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Registro</th>
+                <th>Tempo</th>
+                <th>Observações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if lista %}
+                {% for item in lista %}
+                    <tr>
+                        <td>{{item.reg_data}}</td>
+                        <td>{{item.reg_treinou}}</td>
+                        {% if item.reg_tempo in "" %}
+                            <td>-</td>
+                        {% else %}
+                            <td>{{item.reg_tempo}}</td>
+                        {% endif %}
+                        {% if item.reg_observacao in "" %}
+                            <td>-</td>
+                        {% else %}
+                            <td>{{item.reg_observacao}}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <p>Ainda não há registros.</p>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}
