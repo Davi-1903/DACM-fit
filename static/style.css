@@ -2,12 +2,15 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f4f8;
     margin: 0;
-    height: 100vh;
+    padding: 0;
+    height: 100%;
+    box-sizing: border-box;
 }
 main {
     /* acho que é uma cambiarra */
-    margin-top: 8%;  
+    padding-top: 18vh;
 }
+
 
 .tabela h1 {
       text-align: center;
@@ -37,6 +40,3 @@ main {
 .tabela tbody tr:nth-child(odd) {
     background-color: #f7fbff;
 }
-/* tbody tr:hover {
-    background-color: #ccc5ee;
-} */

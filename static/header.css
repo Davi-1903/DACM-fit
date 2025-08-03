@@ -1,0 +1,29 @@
+header { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    height: 18vh;
+    box-shadow: 0 1px 12px 1px rgb(139, 139, 139);
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+header img {
+    padding: 0px 50px;
+    max-width: 300px;   
+    width: 20vw;        
+    height: auto;
+}
+ul.menu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    padding: 0px 50px;
+}
+ul.menu li a{
+    text-decoration: none;
+    color: #0A0A40;
+    font-family: 'Roboto', sans-serif;
+
+}

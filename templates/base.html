@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=0">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/header.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <!-- TÍTULO PROVISÓRIO -->
     <title>DACM fit - {% block title %}{% endblock %}</title>
 </head>
@@ -10,7 +13,7 @@
 
     {% include 'components/header.html' %}
 
-    {% block content %}{% endblock %}
+    <main>{% block content %}{% endblock %}</main>
 
     {% include 'components/footer.html' %}
 
