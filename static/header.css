@@ -3,7 +3,7 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    height: 18vh;
+    height: 100px;
     box-shadow: 0 1px 12px 1px rgb(139, 139, 139);
     position: fixed;
     top: 0;
@@ -12,7 +12,7 @@ header {
 header img {
     padding: 0px 50px;
     max-width: 300px;   
-    width: 20vw;        
+    width: 45vw;        
     height: auto;
 }
 ul.menu {
