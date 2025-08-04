@@ -21,12 +21,17 @@ init_database()
 def load_user(user_id: str) -> User:
     return User.get(user_id)
 
+@app.errorhandler(404)
+def pagina_inexistente(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def erro_interno(e):
+    return render_template('500.html'), 500
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -168,7 +173,7 @@ def registrar_treino():
             treinou = 'Não'
         tempo = request.form['tempo']
         obs = request.form['observacoes']
-        
+        tempo = request.form.get('tempo')
         verificar = script_sql(f'SELECT * FROM tb_registro_treino WHERE reg_data = ?', (data, ))
         if not verificar:
             script_sql(f'INSERT INTO tb_registro_treino (reg_treinou, reg_data, reg_observacao, reg_tempo, reg_usu_id) VALUES (?, ?, ?, ?, ?)', (treinou, data, obs, tempo, current_user.id))
@@ -185,6 +190,7 @@ def exibir_registro_treino():
     if registros:
         return render_template('exibir_registro_treino.html', lista=registros)
     return render_template('exibir_registro_treino.html')
+
 
 
 if __name__ == '__main__':
