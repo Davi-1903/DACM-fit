@@ -65,7 +65,7 @@ Para executar é preciso seguir alguns passos, caso não tenha familiaridade com
     python -m venv .venv
 
     # Ativando...
-    .\.venv\Scripts\active
+    .\.venv\Scripts\activate
     ```
 
 3. **Baixe todas as depedências do arquivo [`requirements.txt`](requirements.txt)**
