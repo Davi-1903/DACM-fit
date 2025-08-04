@@ -21,16 +21,8 @@
                     <tr>
                         <td>{{item.reg_data}}</td>
                         <td>{{item.reg_treinou}}</td>
-                        {% if item.reg_tempo in "" %}
-                            <td>-</td>
-                        {% else %}
-                            <td>{{item.reg_tempo}}</td>
-                        {% endif %}
-                        {% if item.reg_observacao in "" %}
-                            <td>-</td>
-                        {% else %}
-                            <td>{{item.reg_observacao}}</td>
-                        {% endif %}
+                        <td>{{item.reg_tempo or 0}}</td>
+                        <td>{{item.reg_observacao}}</td>
                     </tr>
                 {% endfor %}
             {% else %}
