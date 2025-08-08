@@ -22,7 +22,7 @@
                         <td>{{item.reg_data}}</td>
                         <td>{{item.reg_treinou}}</td>
                         <td>{{item.reg_tempo or 0}}</td>
-                        <td>{{item.reg_observacao}}</td>
+                        <td>{{item.reg_observacao or 'Sem Observação'}}</td>
                     </tr>
                 {% endfor %}
             {% else %}

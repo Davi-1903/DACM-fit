@@ -4,8 +4,8 @@
 {% block content %}
     {% include 'components/messages.html'   %}
     <!-- HOME PROVISÓRIA -->
-    {% if current_user.is_authenticated %}
-        <h1>Olá!, {{ current_user.nome }}</h1>
+    {% if nome %}
+        <h1>Olá, {{ nome }}!</h1>
     {% else %}
         <h1>Olá!</h1>
     {% endif %}
