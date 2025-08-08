@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, make_response
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import init_database
@@ -31,6 +31,9 @@ def erro_interno(e):
 
 @app.route('/')
 def index():
+    if request.cookies:
+        nome = request.cookies['nome']
+        return render_template('index.html', nome=nome)
     return render_template('index.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -44,12 +47,13 @@ def register():
         if user:
             flash('Você já esta logado', category='error')
             return redirect(url_for('login'))
-
         new_id = (script_sql('SELECT max(usu_id) FROM tb_usuario')[0] or 0) + 1 # Criando o próximo ID
         script_sql(f'INSERT INTO tb_usuario (usu_id, usu_nome, usu_email, usu_senha) VALUES(?, ?, ?, ?)', (new_id, nome, email, generate_password_hash(senha)))
         usuario = User(new_id, nome, email)
         login_user(usuario)
-        return redirect(url_for('dados_pessoais'))
+        response = make_response(redirect(url_for('dados_pessoais')))
+        response.set_cookie('nome', nome)
+        return response
     return render_template('register.html')
 
 
@@ -63,9 +67,11 @@ def login():
         if not user or not check_password_hash(user['usu_senha'], senha):
             flash('Dados incorretos', category='error')
             return redirect(url_for('login'))
-
+        nome = user['usu_nome']
         login_user(User(id=user['usu_id'], nome=user['usu_nome'], email=user['usu_email']))
-        return redirect(url_for('index'))
+        response = make_response(redirect(url_for('index')))
+        response.set_cookie('nome', nome)
+        return response
     return render_template('login.html')
 
 @app.route('/dados_pessoais', methods=['GET', 'POST'])
@@ -95,7 +101,9 @@ def avaliacao():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    response = make_response(redirect(url_for('index')))
+    response.delete_cookie('nome')
+    return response
 
 @app.route('/deletar_conta', methods=['GET', 'POST'])
 @login_required
@@ -157,10 +165,10 @@ def tabela_treino():
         treinos = json.load(f)
     return render_template('tabela_treino.html', treino = treinos[tipo_treino['usu_tipo_treino']])
 
-@app.route('/avisos')
+@app.route('/informes')
 @login_required
-def avisos():
-    return render_template('avisos.html')
+def informes():
+    return render_template('informes.html')
 
 @app.route('/registrar_treino', methods=['GET', 'POST'])
 @login_required
