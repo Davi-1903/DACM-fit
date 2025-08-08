@@ -18,6 +18,8 @@ main {
 }
 
 
+/* Tabela de treino */
+
 .tabela h1 {
       text-align: center;
       color: #2c3050;
@@ -45,4 +47,42 @@ main {
 }
 .tabela tbody tr:nth-child(odd) {
     background-color: #f7fbff;
+}
+
+/* Página de Erro */
+div.error-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #001133;
+    background-color: white;
+    padding: 30px;
+    /* width: 55vw; */
+    border-radius: 10px;
+    box-shadow: 1px 3px 5px 3px rgb(133, 133, 133);
+    /* rgb(74, 67, 88) */
+}
+.error-page img{
+    max-width: 600px;   
+    width: 60vw;        
+    height: auto;
+}
+.error-page h1, .error-page p{
+    padding-bottom: 10px;
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+.buttons {
+    background-color: #001133;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+.buttons:hover{
+    background-color: #192949;
+    padding: 10px 12px;
 }

@@ -1,10 +1,24 @@
 % {% extends 'base.html' %}
 
 {% block title %} Erro 404 {% endblock %}
+{% block style %}
+<style>
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-    <h1>Página não encontrada</h1>
-    <p>Desculpe, a URL digitada não existe</p>
-    <a href="{{url_for('index') }}">Voltar para o inicio</a>
+    <div class="error-page">
+        <img src="{{ url_for('static', filename='media/DACM-fit.svg') }}" alt="icone">
+        <h1>Página não encontrada</h1>
+        <p>Desculpe, a URL digitada não existe</p>
+        <a href="{{url_for('index') }}" class="buttons">Voltar para o inicio</a>
+    </div>
 
 {% endblock %}
