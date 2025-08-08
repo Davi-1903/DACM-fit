@@ -3,6 +3,7 @@ footer {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      width: 100%;
     }
 footer p{
     padding: 10px 0;
@@ -16,15 +17,16 @@ footer p{
 }
 footer .img {
     background-color:  #000043;
-    height: 35%;
-    padding: 2% 0;
+    /* height: 40%;
+    padding: 2% 0; */
     display: flex;
     width: 100%;
     justify-content: center;
+    /* flex-grow: 1; */
     
 }
 footer img {
-    max-width: 300px;   
-    width: 50vw;        
+    max-width: 30%;
+    width: 40vw;        
     height: auto;
 }
