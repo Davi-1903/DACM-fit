@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Perfil
+{% endblock %}
+
+{% block content %}
+<h2>Perfil de {{ user['usu_nome'] }}</h2>
+
+<div class="perfil">
+    <p>Nome: {{ user['usu_nome'] }}</p>
+    <p>Email: {{ user['usu_email'] }}</p>
+    <p>Telefone: {{ user['usu_telefone'] or 'Não informado' }}</p>
+    <p>Endereço: {{ user['usu_endereco'] or 'Não informado' }}</p>
+    <p>Sexo: {{ user['usu_sexo'] or 'Não informado' }}</p>
+    <p>Peso: {{ user['usu_peso'] or 'Não informado' }}</p>
+    <p>Altura: {{ user['usu_altura'] or 'Não informado' }}</p>
+    <p>Data de Nascimento: {{ user['usu_data_nascimento'] or 'Não informado' }}</p>
+    <p>Tipo de Treino: {{ user['usu_tipo_treino'] or 'Não informado' }}</p>
+</div>
+
+<div class="escolhas">
+    <a href="{{ url_for('editar') }}">Editar dados</a>
+    <a href="{{ url_for('logout') }}">Sair da conta</a>
+</div>
+{% endblock %}
+

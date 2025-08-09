@@ -199,7 +199,11 @@ def exibir_registro_treino():
         return render_template('exibir_registro_treino.html', lista=registros)
     return render_template('exibir_registro_treino.html')
 
-
-
+@app.route('/perfil')
+@login_required
+def perfil():
+    user = script_sql('SELECT * FROM tb_usuario WHERE usu_id = ?', (current_user.id,))
+    return render_template('perfil.html', user=user)
+    
 if __name__ == '__main__':
     app.run(debug=True)
