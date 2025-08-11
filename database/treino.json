@@ -3,41 +3,31 @@
     {"Supino reto com barra": {"qnt_series": 4, "qnt_reps": 10, "descanso_(min)": 1}},
     {"Supino inclinado com halteres": {"qnt_series": 3, "qnt_reps": 10, "descanso_(min)": 1}},
     {"Crucifixo com halteres": {"qnt_series": 3, "qnt_reps": 12, "descanso_(min)": 1}},
-    {"Tríceps testa com barra": {"qnt_series": 3, "qnt_reps": 12, "descanso_(min)": 1}},
-    {"Tríceps pulley (corda)": {"qnt_series": 3, "qnt_reps": 15, "descanso_(min)": 1}},
-    {"Abdominal crunch": {"qnt_series": 3, "qnt _reps":20, "descanso_(min)": 1}}
+    {"Tríceps testa com barra": {"qnt_series": 3, "qnt_reps": 12, "descanso_(min)": 1}}
   ],
   "Terça": [
     {"Barra fixa ou puxada na polia alta": {"qnt_series": 4, "qnt_reps": 10, "descanso_(min)": 1}},
     {"Remada curvada com barra": {"qnt_series": 4, "qnt_reps": 10, "descanso_(min)": 1}},
     {"Remada unilateral com halter": {"qnt_series": 3, "qnt_reps": 12, "descanso_(min)": 1}},
-    {"Rosca direta barra": {"qnt_series": 3, "qnt_reps": 12, "descanso_(min)": 1}},
-    {"Rosca martelo": {"qnt_series": 3, "qnt_reps": 15, "descanso_(min)": 1}},
-    {"Prancha": {"qnt_series": 3, "qnt_reps": 30, "descanso_(min)": 1}}
+    {"Rosca direta barra": {"qnt_series": 3, "qnt_reps": 12, "descanso_(min)": 1}}
   ],
   "Quarta": [
     {"Agachamento livre": {"qnt_series": 4, "qnt_reps": 10, "descanso_(min)": 1}},
     {"Leg press": {"qnt_series": 4, "qnt_reps": 12, "descanso_(min)": 1}},
     {"Cadeira extensora": {"qnt_series": 3, "qnt_reps": 15, "descanso_(min)": 1}},
-    {"Avanço com halteres": {"qnt_series": 3, "qnt_reps": 12, "descanso_(min)": 1}},
-    {"Elevação de panturrilha": {"qnt_series": 4, "qnt_reps": 20, "descanso_(min)": 1}},
-    {"Abdominal infra": {"qnt_series": 3, "qnt_reps": 20, "descanso_(min)": 1}}
+    {"Avanço com halteres": {"qnt_series": 3, "qnt_reps": 12, "descanso_(min)": 1}}
   ],
   "Quinta": [
     {"Desenvolvimento militar com halteres": {"qnt_series": 4, "qnt reps ou tempo": 10, "descanso_(min)": 1}},
     {"Elevação lateral": {"qnt_series": 3, "qnt reps ou tempo": 12, "descanso_(min)": 1}},
     {"Elevação frontal": {"qnt_series": 3, "qnt reps ou tempo": 12, "descanso_(min)": 1}},
-    {"Encolhimento de ombros com barra": {"qnt series": 4, "qnt reps ou tempo": 15, "descanso_(min)": 1}},
-    {"Face pull": {"qnt_series": 3, "qnt reps ou tempo": 15, "descanso_(min)": 1}},
-    {"Remada alta com barra": {"qnt_series": 3, "qnt reps ou tempo": 12, "descanso_(min)": 1}}
+    {"Encolhimento de ombros com barra": {"qnt series": 4, "qnt reps ou tempo": 15, "descanso_(min)": 1}}
   ],
   "Sexta": [
     {"Stiff com barra": {"qnt_series": 4, "qnt_reps": 10, "descanso_(min)": 1}},
     {"Mesa flexora": {"qnt_series": 3, "qnt_reps": 12, "descanso_(min)": 1}},
     {"Glúteo no cabo": {"qnt_series": 3, "qnt_reps": 15, "descanso_(min)": 1}},
-    {"Elevação de quadril no chão": {"qnt_series": 4, "qnt_reps": 15, "descanso_(min)": 1}},
-    {"Abdominal infra": {"qnt_series": 3, "qnt_reps": 20, "descanso_(min)": 1}},
-    {"Prancha lateral": {"qnt_series": 3, "qnt_reps": 30, "descanso_(min)": 1}}
+    {"Elevação de quadril no chão": {"qnt_series": 4, "qnt_reps": 15, "descanso_(min)": 1}}
   ]
 },
 "emagrecimento": {

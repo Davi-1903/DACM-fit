@@ -9,7 +9,7 @@
     <form action="{{url_for('alterar_senha')}}" method="post">
         <label for="senha">Nova Senha:</label>
         <input type="password" name="senha" id="senha" required>
-        <p>Insira senha antiga para confirmar:</p>
+        <label>Insira senha antiga para confirmar:</label>
         <input type="password" name="senha_ant" id="senha_ant" required>
         <button type="submit">Enviar</button>
     </form>
