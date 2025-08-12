@@ -4,9 +4,42 @@
 {% block content %}
     {% include 'components/messages.html'   %}
     <!-- HOME PROVISÓRIA -->
-    {% if nome %}
-        <h1>Olá, {{ nome }}!</h1>
-    {% else %}
-        <h1>Olá!</h1>
-    {% endif %}
+    <div class="inicio">
+        {% if nome %}
+            <h1>Bem-vindo(a) de volta, {{ nome }}!</h1>
+            <p>Estamos felizes por tê-lo(a) novamente aqui.</p>
+        {% else %}
+            <h1>Seja bem-vindo (a)!</h1>
+            <p>Juste-se a nós nessa caminhada!</p>
+            <button><a href="{{ url_for('register') }}">Junte-se</a></button>
+        {% endif %}
+    </div>
+    <div class="treino">
+        <h2>Exercícios de forma fácil e difertida</h2>
+        <div class="div_cards">
+            <div class="card">
+                <h3>Treinos personalizados</h3>
+                <p>Treinos em casa para mais conforto</p>
+            </div>
+            <div class="card">
+                <h3>Treinos online</h3>
+                <p>Acesse onde e quando quiser</p>
+            </div>
+            <div class="card">
+                <h3>Videos</h3>
+                <p>Videos personalizados em caso de dúvidas</p>
+            </div>
+        </div>
+    </div>
+    <div class="sobre">
+        <h1>Sobre</h1>
+        <!-- <hr> -->
+        <p>Nossa plataforma foi criada para ajudar você a se movimentar 
+            de forma prática e acessível, onde quer que esteja. Aqui, você 
+            encontra exercicios online pensados para todos os niveis, desde 
+            iniciantes até praticantes avançados. Com aulas guiadas, rotinas 
+            personalizadas e dicas de bem-estar, nosso objetivo é promover saúde, 
+            energia e qualidade de vida diretamente da sua tela.
+        </p>
+    </div>
 {% endblock %}

@@ -13,8 +13,8 @@ body {
 }
 main {
     flex-grow: 1;
-    padding: 10px;
-    margin-top: 120px;
+    padding: 10px 0;
+    padding-top: 120px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,6 +106,7 @@ form{
     align-items: center;
     border-radius: 18px;
     box-shadow: 1px 2px 3px 2px rgb(110, 110, 110);
+    margin-top: 20px;
 }
 form h2 {
     color: #0A0A40;
@@ -143,4 +144,148 @@ form label{
     align-self: flex-start;
     color: rgb(44, 44, 44);
     font-size: 18px;
+}
+
+
+.inicio{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 100px;
+    font-family: 'Roboto', sans-serif;
+}
+/* index */
+.inicio h1{
+    color: #010172;
+    font-size: 6vw;
+    font-weight: bolder;
+}
+
+.inicio p{
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 2vw;
+    color: #3b3b3b;
+    font-weight: 100;
+}
+
+.inicio button{
+    background-color: #010172;
+    font-size: 2.5vw;
+    padding: 10px;
+    width: 20vw;
+}
+
+.treino {
+    background-color: #0A0A40;
+    width: 100%;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 150px 0;
+    gap: 35px;
+}
+.treino h2 {
+    font-size: 40px;
+    font-weight: bold;
+}
+.div_cards{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: 'Chivo Mono', monospace;
+}
+ .card {
+    background: #222275c2;
+    border-radius: 12px; 
+    padding: 25px;
+    width: 300px;
+    color: white; 
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(80, 80, 80, 0.678); 
+    border: 2px solid rgba(255, 255, 255, 0.1); 
+}
+
+.card h3{
+    font-size: 25px;
+    font-weight: 200;
+    margin-bottom: 10px;
+}
+.card p{
+    font-size: 18px;
+    color: #c4c4c4;
+}
+.card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    margin-top: -5px;
+}
+
+.sobre {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 150px;
+    font-family: 'Chivo Mono', monospace;
+}
+.sobre h1{
+    color: #00002A;
+    font-size: 3vw;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 20px 120px;
+    border-bottom: 2px solid #00002A;
+}
+.sobre p{
+    width: 600px;
+    font-size: 20px;
+    text-align: justify;
+    margin-top: 10px;
+}
+@media screen and (max-width: 728px){
+    /* Forms */
+    form input, form select{
+        margin-bottom: 15px;
+    }
+    form h2 {
+        font-size: 40px;
+    }
+    /* index */
+  .inicio h1{
+        font-size: 35px;
+        font-weight: bolder;
+    }
+    .inicio p{
+        font-size: 16px;
+    }
+    .inicio button{
+        font-size: 18px;
+        width: 120px;
+    }
+    .treino h2 {
+        font-size: 30px;
+        text-align: center;
+    }
+    .sobre h1{
+        font-size: 30px;
+    }
+    .sobre p{
+        font-size: 15px;
+        width: 350px;
+    }
+    .card h3{
+        font-size: 20px;
+    }
+    .card p{
+        font-size: 16px;
+        color: #c4c4c4;
+    }
 }
