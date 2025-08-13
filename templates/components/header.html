@@ -6,10 +6,12 @@
             <li><a href="{{ url_for('tabela_treino' ) }}">Tabela de treino</a></li>
             <li><a href="{{ url_for('registrar_treino') }}">Registrar treino</a></li>
             <li><a href="{{ url_for('perfil')}}">Perfil</a></li>
+            <li><a href="{{ url_for('ajuda') }}">Ajuda</a></li>
             <li><a href="{{ url_for('logout' ) }}">Logout</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Login</a></li>
             <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('ajuda') }}">Ajuda</a></li>
             {% endif %}
         </ul>
     </nav>
