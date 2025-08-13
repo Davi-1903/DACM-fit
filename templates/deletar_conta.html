@@ -3,9 +3,12 @@
 {% block title %}Deletar conta{% endblock %}
 
 {% block content %}
+{% include 'components/messages.html'   %}
 <h2>Deseja deletar conta?</h2>
 <h3>Essa ação não pode ser desfeita.</h3>
     <form method="POST" action="{{ url_for('deletar_conta') }}">
+        <label for="senha">Digite a senha para concluir:</label>
+        <input type="password" name="senha" id="senha" placeholder="senha">
         <button type="submit">Deletar conta</button>
     </form>
 
