@@ -250,6 +250,104 @@ form label{
     text-align: justify;
     margin-top: 10px;
 }
+
+/* Página de perfil */
+
+.perfil { 
+    background-color: white;
+    padding: 20px 20px;
+    width: fit-content;
+    border-radius: 18px;
+    margin: 30px auto;
+    display: flex;
+    height: fit-content;
+    margin-bottom: 20px;
+    align-items: center;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.perfil .conteudo{
+    border-left: 1px solid rgb(170, 170, 170);
+    padding: 10px;
+    padding-left: 30px;
+}
+.perfil p{
+    margin-bottom: 10px;
+}
+.perfil h2{
+    text-align: center;
+    color: #00002A;
+    font-size: 30px;
+}
+
+.escolhas {
+    display: flex;
+    justify-content: center; 
+    gap: 10px; 
+    margin-top: 20px; 
+}
+
+.escolhas button {
+    padding: 10px 20px;
+    border: none;
+    width: 200px;
+    border-radius: 8px;
+    background-color: #001147 ;
+    color: white;
+    cursor: pointer;
+}
+
+.escolhas button a {
+    color: white;
+    text-decoration: none;
+}
+
+
+/* Página de ajuda */
+
+.ajuda {
+    max-width: 700px;
+    margin: 30px auto;
+    background: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.ajuda h2 {
+    color: #001147;
+    margin-bottom: 10px;
+}
+
+.ajuda p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.perguntas details {
+    background: #f8f9fc;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.perguntas details:hover {
+    background: #eef2f9;
+}
+
+.perguntas summary {
+    font-weight: bold;
+    color: #001147;
+    font-size: 16px;
+}
+
+.perguntas p {
+    margin-top: 8px;
+    color: #333;
+}
+
+
 @media screen and (max-width: 728px){
     /* Forms */
     form input, form select{

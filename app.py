@@ -40,6 +40,10 @@ def index():
         
     return render_template('index.html')
 
+@app.route('/ajuda')
+def ajuda():
+    return render_template('ajuda.html')
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -114,10 +118,19 @@ def logout():
 @login_required
 def deletar_conta():
     if request.method == 'POST':
-        script_sql('delete from tb_registro_treino where reg_usu_id = ?;', (current_user.id,))
-        script_sql('delete from tb_usuario where usu_id = ?;', (current_user.id,))
-        logout_user()
-        return redirect(url_for('index'))
+        senha = request.form['senha']
+        user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (current_user.id,))
+        if check_password_hash(user['usu_senha'], senha):
+            script_sql('delete from tb_registro_treino where reg_usu_id = ?;', (current_user.id,))
+            script_sql('delete from tb_usuario where usu_id = ?;', (current_user.id,))
+            logout_user()
+            response = make_response(redirect(url_for('index')))
+            response.delete_cookie('nome', None)
+            response.delete_cookie('new_user', None)
+            return response
+        flash('Senha incorreta. Faça o passo novamente.', category='error')
+        return redirect(url_for('deletar_conta'))
+        
     return render_template('deletar_conta.html')
 
 @app.route('/editar', methods=['GET', 'POST'])
