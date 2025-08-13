@@ -32,8 +32,12 @@ def erro_interno(e):
 @app.route('/')
 def index():
     if request.cookies:
-        nome = request.cookies['nome']
-        return render_template('index.html', nome=nome)
+        if 'nome' in request.cookies:
+            nome = request.cookies.get('nome', None)
+            return render_template('index.html', nome=nome)
+        nome = request.cookies.get('new_user', None)
+        return render_template('index.html', new_user=nome)
+        
     return render_template('index.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -52,7 +56,7 @@ def register():
         usuario = User(new_id, nome, email)
         login_user(usuario)
         response = make_response(redirect(url_for('dados_pessoais')))
-        response.set_cookie('nome', nome)
+        response.set_cookie('new_user', nome)
         return response
     return render_template('register.html')
 
@@ -102,7 +106,8 @@ def avaliacao():
 def logout():
     logout_user()
     response = make_response(redirect(url_for('index')))
-    response.delete_cookie('nome')
+    response.delete_cookie('nome', None)
+    response.delete_cookie('new_user', None)
     return response
 
 @app.route('/deletar_conta', methods=['GET', 'POST'])

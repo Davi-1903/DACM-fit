@@ -8,6 +8,9 @@
         {% if nome %}
             <h1>Bem-vindo(a) de volta, {{ nome }}!</h1>
             <p>Estamos felizes por tê-lo(a) novamente aqui.</p>
+        {% elif new_user %}
+            <h1>Bem-vindo(a), {{ new_user }}!</h1>
+            <p>Estamos felizes por tê-lo(a) aqui.</p>
         {% else %}
             <h1>Seja bem-vindo (a)!</h1>
             <p>Juste-se a nós nessa caminhada!</p>
