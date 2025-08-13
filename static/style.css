@@ -386,4 +386,42 @@ form label{
         font-size: 16px;
         color: #c4c4c4;
     }
+    /* Tabela de treino */
+
+
+    .tabela thead {
+        padding: 10px 5px;
+    }
+    .tabela table, td, th{
+        padding: 10px 5px;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+    td.dia{
+        background-color: #001147;
+        border-radius: 8px;
+        color: white;
+        padding: 14px;
+    }
+    tr {
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    td {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    td::before {
+        content: attr(conteudo);
+        font-weight: bold;
+    }
 }

@@ -3,6 +3,7 @@
 {% block title %}Dados pessoais{% endblock %}
 
 {% block content %}
+    {% include 'components/messages.html' %}
     <form action="{{ url_for('dados_pessoais' ) }}" method="POST">
         <h2>Dados pessoais</h2>
         <label for="endereco">Endereço </label>

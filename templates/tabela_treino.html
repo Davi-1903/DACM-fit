@@ -18,14 +18,20 @@
             <tbody>
                 {% for dia, exercicios in treino.items() %}
                 <tr style="border: 2px solid rgb(221, 221, 221);">
-                    <td rowspan="5" style="font-weight: bold;">{{dia}}</td>
+                    <td rowspan="5" style="font-weight: bold;" conteudo="Dia" class="dia">{{dia}}</td>
                 </tr>
                 {% for dados in exercicios %}
                     <tr>
-                    {% for k in dados %}
-                        <td>{{k}}</td>
-                        {% for i in dados[k].values() %}
-                            <td>{{i}}</td>
+                    {% for k, x in dados.items() %}
+                        <td conteudo="Exercício">{{k}}</td>
+                        {% for i, r in x.items() %}
+                            {% if i == 'qnt_series' %}
+                                <td conteudo="Séries">{{r}}</td>
+                            {% elif i == 'qnt_reps' %}
+                                <td conteudo="Repetições">{{r}}</td>
+                            {% else %}
+                                <td conteudo="Descanso(min)">{{r}}</td>
+                            {% endif %}
                         {% endfor %}
                     {% endfor %}
                     </tr>
