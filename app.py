@@ -178,7 +178,13 @@ def alterar_senha():
 @app.route('/treino')
 @login_required
 def tabela_treino():
-    tipo_treino = script_sql(f'SELECT usu_tipo_treino FROM tb_usuario WHERE usu_id = ?', (current_user.id,))
+    tipo_treino = script_sql(f'SELECT * FROM tb_usuario WHERE usu_id = ?', (current_user.id,))
+    if tipo_treino['usu_endereco'] is None:
+        flash('Termine o cadastro.', category='error')
+        return redirect(url_for('dados_pessoais'))
+    if tipo_treino['usu_peso'] is None:
+        flash('Termine o cadastro.', category='error')
+        return redirect(url_for('avaliacao'))
     with open('database/treino.json', encoding='utf-8') as f:
         treinos = json.load(f)
     return render_template('tabela_treino.html', treino = treinos[tipo_treino['usu_tipo_treino']])
