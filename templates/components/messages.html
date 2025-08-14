@@ -8,11 +8,11 @@
 
 {% endwith %}
 
-{% with sucess = get_flashed_messages(category_filter=["sucess"]) %}
+{% with success = get_flashed_messages(category_filter=["success"]) %}
 
-{% if sucess %}
- {% for msg in sucess %}
- <span class="sucess">{{ msg }}</span>
+{% if success %}
+ {% for msg in success %}
+ <span class="success">{{ msg }}</span>
  {% endfor %}
 {% endif %}
 

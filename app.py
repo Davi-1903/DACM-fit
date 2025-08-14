@@ -53,7 +53,7 @@ def register():
 
         user = script_sql(f'SELECT * FROM tb_usuario WHERE usu_email = ?', (email,))
         if user:
-            flash('Você já esta logado', category='error')
+            flash('Já existe um cadastro com esse login!', category='error')
             return redirect(url_for('login'))
         new_id = (script_sql('SELECT max(usu_id) FROM tb_usuario')[0] or 0) + 1 # Criando o próximo ID
         script_sql(f'INSERT INTO tb_usuario (usu_id, usu_nome, usu_email, usu_senha) VALUES(?, ?, ?, ?)', (new_id, nome, email, generate_password_hash(senha)))
@@ -79,6 +79,8 @@ def login():
         login_user(User(id=user['usu_id'], nome=user['usu_nome'], email=user['usu_email']))
         response = make_response(redirect(url_for('index')))
         response.set_cookie('nome', nome)
+        response.set_cookie('logado', 'sim')
+        flash('Login realizado com sucesso!', category='success')
         return response
     return render_template('login.html')
 
@@ -101,8 +103,10 @@ def avaliacao():
         data_nascimento = request.form.get('data_nascimento')
         tipo_treino = request.form.get('tipo_treino')
         script_sql(f'UPDATE tb_usuario SET usu_peso = ?, usu_altura = ?, usu_data_nascimento = ?, usu_tipo_treino = ? WHERE usu_id = ?', (peso, altura, data_nascimento, tipo_treino, current_user.id))
-        flash('Cadastro realizado com sucesso', category='sucess')
-        return redirect(url_for('index'))
+        response = make_response(redirect(url_for('index')))
+        response.set_cookie('logado', 'sim')
+        flash('Cadastro realizado com sucesso', category='success')
+        return response
     return render_template('avaliacao_fisica.html')
 
 @app.route('/logout')
@@ -112,6 +116,7 @@ def logout():
     response = make_response(redirect(url_for('index')))
     response.delete_cookie('nome', None)
     response.delete_cookie('new_user', None)
+    response.delete_cookie('logado', None)
     return response
 
 @app.route('/deletar_conta', methods=['GET', 'POST'])
@@ -127,6 +132,7 @@ def deletar_conta():
             response = make_response(redirect(url_for('index')))
             response.delete_cookie('nome', None)
             response.delete_cookie('new_user', None)
+            response.delete_cookie('logado', None)
             return response
         flash('Senha incorreta. Faça o passo novamente.', category='error')
         return redirect(url_for('deletar_conta'))
@@ -151,7 +157,8 @@ def editar():
         senha = request.form['senha']
         if check_password_hash(user['usu_senha'], senha):
             script_sql(f'UPDATE tb_usuario SET usu_nome = ?, usu_peso = ?, usu_altura = ?, usu_telefone = ?, usu_data_nascimento = ?, usu_sexo = ?, usu_endereco = ?, usu_tipo_treino = ?, usu_email = ? WHERE usu_id = ?;', (nome, peso, altura, telefone, data, sexo, endereco, tipo_treino, email, id_user))
-            return redirect(url_for('index'))
+            flash('Dados alterados com sucesso!', category='success')
+            return redirect(url_for('editar'))
         flash('Senha incorreta. Faça o passo novamente.', category='error')
         return redirect(url_for('editar'))
     return render_template('formulario_edicao.html', user=user)
@@ -189,10 +196,10 @@ def tabela_treino():
         treinos = json.load(f)
     return render_template('tabela_treino.html', treino = treinos[tipo_treino['usu_tipo_treino']])
 
-@app.route('/informes')
+@app.route('/avisos')
 @login_required
-def informes():
-    return render_template('informes.html')
+def avisos():
+    return render_template('avisos.html')
 
 @app.route('/registrar_treino', methods=['GET', 'POST'])
 @login_required
@@ -206,7 +213,7 @@ def registrar_treino():
         tempo = request.form['tempo']
         obs = request.form['observacoes']
         tempo = request.form.get('tempo')
-        verificar = script_sql(f'SELECT * FROM tb_registro_treino WHERE reg_data = ?', (data, ))
+        verificar = script_sql(f'SELECT * FROM tb_registro_treino WHERE reg_data = ? and reg_usu_id = ?', (data, current_user.id))
         if not verificar:
             script_sql(f'INSERT INTO tb_registro_treino (reg_treinou, reg_data, reg_observacao, reg_tempo, reg_usu_id) VALUES (?, ?, ?, ?, ?)', (treinou, data, obs, tempo, current_user.id))
             flash('Registro realizado com sucesso', category='success')
