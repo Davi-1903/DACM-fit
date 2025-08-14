@@ -2,9 +2,8 @@
 
 {% block title %}Home{% endblock %}
 {% block content %}
-    {% include 'components/messages.html'   %}
-    <!-- HOME PROVISÓRIA -->
-    <div class="inicio">
+{% include 'components/messages.html'   %}
+<div class="inicio">
         {% if nome %}
             <h1>Bem-vindo(a) de volta, {{ nome }}!</h1>
             <p>Estamos felizes por tê-lo(a) novamente aqui.</p>
