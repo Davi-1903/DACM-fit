@@ -8,22 +8,68 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 1000;
 }
+
 header img {
     padding: 0px 50px;
     min-width: 300px;   
     width: 20vw;        
     height: auto;
 }
+
 ul.menu {
     list-style: none;
     display: flex;
     gap: 30px;
     padding: 0px 50px;
 }
+
 ul.menu li a{
     text-decoration: none;
     color: #0A0A40;
     font-family: 'Roboto', sans-serif;
+}
 
+#hamburguer {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0 20px;
+}
+
+@media screen and (max-width: 768px){
+    .hamburger {
+        display: block;
+    }
+
+    nav {
+        position: absolute;
+        top: 120px;
+        right: 0;
+        width: 200px;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        display: none;
+        flex-direction: column;
+    }
+
+    #hamburguer:checked + .hamburger + nav {
+        display: flex;
+    }
+
+    ul.menu {
+        flex-direction: column;
+        gap: 0;
+        padding: 10px;
+    }
+
+    ul.menu li {
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
 }

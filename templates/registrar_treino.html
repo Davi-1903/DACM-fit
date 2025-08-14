@@ -4,6 +4,35 @@
     Registrar Treino
 {% endblock %}
 
+        
+{% block style %}
+    <style>
+        textarea {
+            width: 100%;
+        }
+        form > a{
+            color: #00002A;
+            text-decoration: none;
+        }
+        form > a:hover {
+            text-decoration: underline;
+        }
+
+        #check {
+            display: flex;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        #treinou {
+            width: auto;
+            margin: auto;
+            margin-left: 5px;
+        }
+
+    </style>
+{% endblock %}
+
 {% block content %}
     <form action="{{url_for('registrar_treino')}}" method="post">
         <h2>Registrar Treino</h2>
@@ -12,8 +41,10 @@
         <label for="data">Data:</label>
         <input type="date" name="data" id="data" required>
 
-        <label for="treinou">Treinou hoje?</label>
-        <input type="checkbox" id="treinou" name="treinou">
+        <div id="check">
+            <label for="treinou">Treinou hoje?</label>
+            <input type="checkbox" id="treinou" name="treinou">
+        </div>
 
         <label for="tempo">Tempo:</label>
         <input type="number" name="tempo" id="tempo" placeholder="60 (min)">
@@ -23,5 +54,6 @@
         <textarea id="observacoes" name="observacoes" rows="3" placeholder="Como foi o treino, dores, humor etc. (opcional)"></textarea>
         
         <button type="submit">Salvar registro</button>
+        <a href="{{url_for('exibir_registro_treino')}}">Acessar registros</a>
     </form>
 {% endblock %}

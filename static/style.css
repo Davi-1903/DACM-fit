@@ -27,6 +27,10 @@ main {
 
 /* Tabela de treino */
 
+.tabela{
+        margin-top: 25px;
+}
+
 .tabela h1 {
       text-align: center;
       color: #2c3050;
@@ -105,9 +109,14 @@ form{
     width: fit-content;
     align-items: center;
     border-radius: 18px;
-    box-shadow: 1px 2px 3px 2px rgb(110, 110, 110);
+    box-shadow: 0 4px 12px #0000001a;
     margin-top: 20px;
 }
+
+#register > button, #login > button {
+    width: 300px;
+}
+
 form h2 {
     color: #0A0A40;
     font-size: 50px;
@@ -120,10 +129,11 @@ form input, form select{
     border: 0;
     border-radius: 6px;
     margin-bottom: 25px;
-    width: 300px;
+    width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     align-self: flex-start;
 }
+
 button{
     padding: 10px 20px;
     background-color: #CFCFDF;
@@ -131,7 +141,7 @@ button{
     border-radius: 6px;
     margin-top: 10px;
     margin-bottom: 25px;
-    width: 300px;
+    width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #00002A;
     color: white;
@@ -157,6 +167,7 @@ form label{
     gap: 10px;
     margin: 100px;
     font-family: 'Roboto', sans-serif;
+    text-align: center;
 }
 /* index */
 .inicio h1{
@@ -255,20 +266,27 @@ form label{
 
 .perfil { 
     background-color: white;
+    box-shadow: 0 4px 12px #0000001a;
     padding: 20px 20px;
     width: fit-content;
     border-radius: 18px;
     margin: 30px auto;
     display: flex;
     height: fit-content;
+    gap: 10px;
+    justify-content: center;
     margin-bottom: 20px;
     align-items: center;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 .perfil .conteudo{
-    border-left: 1px solid rgb(170, 170, 170);
     padding: 10px;
     padding-left: 30px;
+    border-left: 1px solid rgb(170, 170, 170);
+}
+
+.perfil_nome {
+    text-align: center;
 }
 .perfil p{
     margin-bottom: 10px;
@@ -347,15 +365,34 @@ form label{
     color: #333;
 }
 
+.success {
+    background-color: #eeeeee80;
+    color: #2c3050;
+    border-radius: 10px;
+    padding: 5px 25px;
+    margin: 25px 0;
+    font-weight: bold;
+}
 
-@media screen and (max-width: 728px){
+.error {
+    margin: 25px 0;
+    background-color: #eeeeee80;
+    color: #a02a2a;
+    border-radius: 10px;
+    padding: 5px 25px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px){
     /* Forms */
+
     form input, form select{
         margin-bottom: 15px;
     }
     form h2 {
         font-size: 40px;
     }
+    
     /* index */
   .inicio h1{
         font-size: 35px;
@@ -387,7 +424,7 @@ form label{
         color: #c4c4c4;
     }
     /* Tabela de treino */
-
+    
 
     .tabela thead {
         padding: 10px 5px;

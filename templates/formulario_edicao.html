@@ -7,24 +7,26 @@
 {% block style %}
     <style>
         form{
-            margin: 10px 120px;
+            margin: 25px 120px 0 120px;
         }
         .editar{
             display: flex;
             flex-wrap: wrap;
             gap: 2px;
             justify-content: space-between;
+            gap: 10px;
         }
-        .editar div{
-            flex: 0 0 48%;
+        .editar label {
+            flex: 1;
+            flex-basis: 300px;
         }
-        button {
-            margin: auto;
-            display: block;
-        }
-        a{
+
+        main a{
             color: #00002A;
             margin-top: 10px;
+            text-decoration: none;
+        }
+        main a:hover {
             text-decoration: underline;
         }
         label {
@@ -35,39 +37,42 @@
 
 
 {% block content %}
+    {% include 'components/messages.html'   %}
     <form action="{{ url_for('editar') }}" method="post">
         <h2>Editar dados</h2>
+
+    
         <div class="editar">
-            <div>
-                <label for="email">Email: </label>
+            <label for="email">Email: 
+
                 <input type="email" name="email" id="email" value="{{user['usu_email']}}">
-            </div>
-            <div>
-                <label for="nome">Nome: </label>
+            </label>
+            <label for="nome">Nome: 
+
                 <input type="text" name="nome" id="nome" value="{{user['usu_nome']}}">
-            </div>
-            <div>
-                <label for="endereco">Endereço: </label>
+            </label>
+            <label for="endereco">Endereço: 
+
                 <input type="text" name="endereco" id="endereco" value="{{user['usu_endereco']}}">
-            </div>
-            <div>
-                <label for="telefone">Telefone: </label>
+            </label>
+            <label for="telefone">Telefone: 
+
                 <input type="tel" name="telefone" id="telefone" value="{{user['usu_telefone']}}">
-            </div>
-            <div>
-                <label for="peso">Peso: </label>
+            </label>
+            <label for="peso">Peso: 
+
                 <input type="number" name="peso" id="peso" value="{{user['usu_peso']}}" step="0.01" min="0">
-            </div>
-            <div>
-                <label for="altura">Altura: </label>
+            </label>
+            <label for="altura">Altura: 
+
                 <input type="number" name="altura" id="altura" value="{{user['usu_altura']}}" step="0.01" min="0">
-            </div>
-            <div>
-                <label for="data">Data de Nascimento: </label>
+            </label>
+            <label for="data">Data de Nascimento: 
+
                 <input type="date" name="data" id="data" value="{{user['usu_data_nascimento']}}">
-            </div>
-            <div>
-                <label for="sexo">Sexo: </label>
+            </label>
+            <label for="sexo">Sexo: 
+
                 <select name="sexo" id="sexo">
                     {% if user['usu_sexo'] == 'fem' %}
                         <option value="fem" selected>Feminino</option>
@@ -86,9 +91,9 @@
                     {% endif %}
                 
                 </select>
-            </div>
-            <div>
-                <label for="tipo_treino">Tipo de treino: </label>
+            </label>
+            <label for="tipo_treino">Tipo de treino: 
+
                 <select name="tipo_treino" id="tipo_treino">
                     {% if user['usu_tipo_treino'] == 'hipertrofia' %}
                         <option value="hipertrofia" selected>Hipertrofia</option>
@@ -111,13 +116,15 @@
                         <option value="funcional">Funcional</option>
                     {% endif %}
                 </select>
-            </div>
-            <div>
-                <label>Insira a senha para finalizar:</label>
-                <input type="password" name="senha" id="senha">
-            </div>
-            <button type="submit">Editar</button>
+            </label>
+            <label>Insira a senha para finalizar:
+
+                <input type="password" name="senha" id="senha" required>
+            </label>
+            
         </div>
+        <button type="submit">Editar</button>
+        
     </form>
     <a href="{{url_for('alterar_senha')}}">Alterar senha?</a>
     <a href="{{url_for('deletar_conta')}}">Apagar conta?</a>

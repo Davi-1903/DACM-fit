@@ -4,8 +4,36 @@
     Registro treino
 {% endblock %}
 
+{% block style %}
+    <style>
+        table {
+            border-collapse: collapse;
+            box-shadow: 0 4px 12px #0000001a;
+            
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        h1 {
+            color: #0A0A40;
+            margin-bottom: 25px;
+            margin-top: 25px;
+        }
+        thead {
+            background-color: #0A0A40;
+            color: white;
+        }
+        tbody tr {
+            border: 1px  solid #dddddd;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #f7fbff;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-    <h2>Registros</h2>
+    {% include 'components/messages.html'   %}
+    <h1>Registros</h2>
     <table>
         <thead>
             <tr>
@@ -20,7 +48,11 @@
                 {% for item in lista %}
                     <tr>
                         <td>{{item.reg_data}}</td>
-                        <td>{{item.reg_treinou}}</td>
+                        {% if item.reg_treinou == 'Não' %}
+                            <td style="color:#a02a2a;">{{item.reg_treinou}}</td>
+                        {% else %}
+                            <td style="color: #2c3050;">{{item.reg_treinou}}</td>
+                        {% endif %}
                         <td>{{item.reg_tempo or 0}}</td>
                         <td>{{item.reg_observacao or 'Sem Observação'}}</td>
                     </tr>

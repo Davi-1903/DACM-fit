@@ -1,0 +1,84 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+    Avisos
+{% endblock %}
+
+{% block style %}
+    <style>
+        main {
+            gap: 15px;
+        }
+
+        .funcionamento {
+            margin-top: 20px;
+        }
+
+        .funcionamento, .contato, .endereco{
+            width: 50%;
+            background-color: white;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 4px 12px #0000001a;
+        }
+        h1 {
+            color: #00002A;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: #00002A;
+            margin: 8px 0;
+        }
+
+        p {
+            margin-top: -5px;
+            width: fit-content;
+        }
+        .titulo-f::before {
+            content: url('../static/media/horário.svg');
+            margin-right: 8px;
+        }
+        .titulo-c::before {
+            content: url('../static/media/telefone.svg');
+            margin-right: 8px;
+        }
+        .titulo-e::before {
+            content: url('../static/media/local.svg');
+            margin-right: 8px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="funcionamento">
+        <h1 class="titulo-f">Horário de Funcionamento</h1>
+        <h3>Segunda à Sexta</h3>
+        <p>05:00 - 22:00</p>
+        
+        <h3>Sábado</h3>
+        <p>05:00 - 13:00</p>
+        
+        <h3>Domingo</h3>
+        <p>Fechado</p>
+    </div>
+
+    <div class="contato">
+        <h1 class='titulo-c'>Contatos</h1>
+        <h3>Email</h3>
+        <p>dacmfit@gmail.com</p>
+        
+        <h3>Telefone</h3>
+        <p>(84) 00000-0000</p>
+    </div>
+
+    <div class="endereco">
+        <h1 class="titulo-e">Endereço</h1>
+        <p>
+            Avenida Seridó, 845 – Centro, Caicó, RN – CEP 59300-000
+        </p>
+    </div>
+
+{% endblock %}
