@@ -57,15 +57,15 @@
             </label>
             <label for="telefone">Telefone: 
 
-                <input type="tel" name="telefone" id="telefone" value="{{user['usu_telefone']}}">
+                <input type="tel" name="telefone" id="telefone" pattern="(?:\(\d{2}\)\s?)?\d{4,5}-\d{4}" value="{{user['usu_telefone']}}">
             </label>
             <label for="peso">Peso: 
 
-                <input type="number" name="peso" id="peso" value="{{user['usu_peso']}}" step="0.01" min="0">
+                <input type="number" name="peso" id="peso"  min="0" max="999" step="0.01" value="{{user['usu_peso']}}" step="0.01" min="0">
             </label>
             <label for="altura">Altura: 
 
-                <input type="number" name="altura" id="altura" value="{{user['usu_altura']}}" step="0.01" min="0">
+                <input type="number" name="altura" id="altura" min="0.5" max="3.0" step="0.01" value="{{user['usu_altura']}}" step="0.01" min="0">
             </label>
             <label for="data">Data de Nascimento: 
 

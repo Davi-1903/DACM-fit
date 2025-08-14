@@ -7,9 +7,9 @@
     <form action="{{ url_for('dados_pessoais' ) }}" method="POST">
         <h2>Dados pessoais</h2>
         <label for="endereco">Endereço </label>
-        <input type="text" id="endereco" name="endereco" required>
+        <input type="text" id="endereco" name="endereco" placeholder="Rua Exemplo, 123 - Bairro, Cidade - Estado" required>
         <label for="telefone">Telefone </label>
-        <input type="tel" id="telefone" name="telefone" required>
+        <input type="tel" id="telefone" name="telefone"  placeholder="(99) 99999-9999" pattern="(?:\(\d{2}\)\s?)?\d{4,5}-\d{4}" required>
         <label for="sexo">Sexo </label>
         <select name="sexo" id="sexo">
             <option value="masc">Marculino</option>
